@@ -1520,6 +1520,31 @@ footer > .container {
     align-items: center;
 }
 
+.chat-email {
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    color: white;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius-sm);
+    cursor: not-allowed;
+    transition: all 0.2s ease;
+    opacity: 0.4;
+}
+
+.chat-email.active {
+    opacity: 1;
+    cursor: pointer;
+}
+
+.chat-email.active:hover {
+    background: rgba(255, 255, 255, 0.25);
+    transform: scale(1.1);
+}
+
 .chat-reset {
     background: rgba(255, 255, 255, 0.1);
     border: none;

@@ -22,7 +22,7 @@ class AIChat {
         this.streamingMessageDiv = null;
         this.sessionId = this.generateSessionId();
         this.toolStatusDiv = null;
-        this.emailTranscriptButton = null;
+        this.chatEmailBtn = null;
         this.hasShownEmailButton = false;
 
         this.init();
@@ -51,6 +51,16 @@ class AIChat {
         this.chatClose.addEventListener('click', () => this.toggleChat());
         this.chatReset.addEventListener('click', () => this.resetChat());
         this.chatForm.addEventListener('submit', (e) => this.handleSubmit(e));
+
+        // Email transcript button in header
+        this.chatEmailBtn = document.getElementById('chatEmail');
+        if (this.chatEmailBtn) {
+            this.chatEmailBtn.addEventListener('click', () => {
+                if (this.chatEmailBtn.classList.contains('active')) {
+                    this.showEmailModal();
+                }
+            });
+        }
 
         // Track user scroll to pause auto-scroll during streaming
         this.chatMessages.addEventListener('scroll', () => this.handleScroll());
@@ -193,11 +203,11 @@ class AIChat {
             content: text
         });
 
-        // Show email transcript button after first AI response (excluding welcome message)
+        // Enable email transcript button after first AI response (excluding welcome message)
         if (type === 'ai' && this.conversationHistory.length >= 3 && !this.hasShownEmailButton) {
-            // Wait a moment for smooth UX
+            // Enable the header email button
             setTimeout(() => {
-                this.showEmailTranscriptButton();
+                this.enableEmailButton();
             }, 500);
         }
     }
@@ -521,10 +531,10 @@ class AIChat {
                             this.isStreaming = false;
                             this.streamingMessageDiv = null;
                             
-                            // Show email transcript button after first AI response
+                            // Enable email transcript button after first AI response
                             if (this.conversationHistory.length >= 3 && !this.hasShownEmailButton) {
                                 setTimeout(() => {
-                                    this.showEmailTranscriptButton();
+                                    this.enableEmailButton();
                                 }, 500);
                             }
                             
@@ -804,47 +814,16 @@ class AIChat {
         this.scrollToBottom();
     }
 
-    showEmailTranscriptButton() {
-        // Only show once and only if we have conversation history
+    enableEmailButton() {
+        // Enable the header email button once we have conversation
         if (this.hasShownEmailButton || this.conversationHistory.length === 0) {
             return;
         }
 
-        // Remove existing button if any
-        if (this.emailTranscriptButton) {
-            this.emailTranscriptButton.remove();
+        if (this.chatEmailBtn) {
+            this.chatEmailBtn.classList.add('active');
+            this.hasShownEmailButton = true;
         }
-
-        const buttonContainer = document.createElement('div');
-        buttonContainer.className = 'email-transcript-container';
-        buttonContainer.style.cssText = 'text-align: center; padding: 16px 0; margin-top: 12px; border-top: 1px solid #e5e7eb;';
-
-        buttonContainer.innerHTML = `
-            <button id="emailTranscriptBtn" class="email-transcript-btn" style="background: linear-gradient(135deg, #8B5CF6 0%, #6366f1 100%); color: white; border: none; padding: 12px 24px; border-radius: 8px; font-size: 14px; font-weight: 600; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; transition: transform 0.2s, box-shadow 0.2s; box-shadow: 0 2px 8px rgba(139, 92, 246, 0.3);">
-                <span style="font-size: 18px;">📧</span>
-                <span>Email Me This Chat</span>
-            </button>
-        `;
-
-        this.chatMessages.appendChild(buttonContainer);
-        this.emailTranscriptButton = buttonContainer;
-        this.hasShownEmailButton = true;
-
-        // Add hover effect
-        const btn = buttonContainer.querySelector('#emailTranscriptBtn');
-        btn.addEventListener('mouseenter', () => {
-            btn.style.transform = 'translateY(-2px)';
-            btn.style.boxShadow = '0 4px 12px rgba(139, 92, 246, 0.4)';
-        });
-        btn.addEventListener('mouseleave', () => {
-            btn.style.transform = 'translateY(0)';
-            btn.style.boxShadow = '0 2px 8px rgba(139, 92, 246, 0.3)';
-        });
-
-        // Add click handler
-        btn.addEventListener('click', () => this.showEmailModal());
-
-        this.scrollToBottom();
     }
 
     showEmailModal() {
@@ -873,7 +852,7 @@ class AIChat {
                         <button type="button" id="cancelEmailBtn" style="flex: 1; padding: 12px; border: 2px solid #e5e7eb; background: white; color: #6b7280; border-radius: 8px; font-size: 15px; font-weight: 600; cursor: pointer; transition: all 0.2s;">
                             Cancel
                         </button>
-                        <button type="submit" id="sendEmailBtn" style="flex: 1; padding: 12px; border: none; background: linear-gradient(135deg, #8B5CF6 0%, #6366f1 100%); color: white; border-radius: 8px; font-size: 15px; font-weight: 600; cursor: pointer; transition: all 0.2s; box-shadow: 0 2px 8px rgba(139, 92, 246, 0.3);">
+                        <button type="submit" id="sendEmailBtn" style="flex: 1; padding: 12px; border: none; background: linear-gradient(135deg, #5990AE 0%, #3D6B82 100%); color: white; border-radius: 8px; font-size: 15px; font-weight: 600; cursor: pointer; transition: all 0.2s; box-shadow: 0 2px 8px rgba(89, 144, 174, 0.3);">
                             Send Chat 📧
                         </button>
                     </div>
@@ -891,7 +870,7 @@ class AIChat {
                 }
                 #transcriptEmail:focus {
                     outline: none;
-                    border-color: #8B5CF6;
+                    border-color: #5990AE;
                 }
                 #cancelEmailBtn:hover {
                     background: #f3f4f6;
@@ -899,7 +878,7 @@ class AIChat {
                 }
                 #sendEmailBtn:hover {
                     transform: translateY(-1px);
-                    box-shadow: 0 4px 12px rgba(139, 92, 246, 0.4);
+                    box-shadow: 0 4px 12px rgba(89, 144, 174, 0.4);
                 }
                 #sendEmailBtn:disabled {
                     opacity: 0.6;
