@@ -3,18 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Callback Requests - Admin Dashboard | Websited</title>
+    <title>Callback Requests - Admin Dashboard | Elite Dentistry</title>
     <style>
         :root {
-            --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            --gradient-secondary: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --primary: #5990AE;
+            --primary-dark: #3D6B82;
+            --primary-light: #7AACCA;
+            --gradient-primary: linear-gradient(135deg, #3D6B82 0%, #5990AE 50%, #7AACCA 100%);
+        }
+
+        * {
+            box-sizing: border-box;
         }
 
         body {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #1a2530 0%, #2A4A5C 100%);
             min-height: 100vh;
             padding: 20px;
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            margin: 0;
         }
 
         .admin-container {
@@ -24,10 +31,10 @@
 
         .admin-header {
             background: white;
-            border-radius: 16px;
-            padding: 24px 32px;
-            margin-bottom: 24px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            border-radius: 12px;
+            padding: 20px 28px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -35,47 +42,48 @@
 
         .admin-header h1 {
             margin: 0;
-            font-size: 28px;
-            background: var(--gradient-primary);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            font-size: 24px;
+            color: var(--primary-dark);
+            font-weight: 700;
+        }
+
+        .header-subtitle {
+            margin: 4px 0 0 0;
+            color: #6b7280;
+            font-size: 14px;
         }
 
         .logout-btn {
-            background: #ef4444;
+            background: #dc2626;
             color: white;
             border: none;
             padding: 10px 20px;
-            border-radius: 8px;
+            border-radius: 6px;
             cursor: pointer;
             font-size: 14px;
             font-weight: 600;
-            transition: all 0.3s;
+            transition: all 0.2s;
         }
 
         .logout-btn:hover {
-            background: #dc2626;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(239, 68, 68, 0.4);
+            background: #b91c1c;
         }
 
         .login-card {
             background: white;
-            border-radius: 16px;
-            padding: 48px;
-            max-width: 400px;
-            margin: 100px auto;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+            border-radius: 12px;
+            padding: 40px;
+            max-width: 360px;
+            margin: 80px auto;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.25);
         }
 
         .login-card h2 {
             text-align: center;
-            margin-bottom: 32px;
-            background: var(--gradient-primary);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            margin-bottom: 28px;
+            color: var(--primary-dark);
+            font-size: 22px;
+            font-weight: 700;
         }
 
         .form-group {
@@ -84,95 +92,93 @@
 
         .form-group label {
             display: block;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
             font-weight: 600;
             color: #374151;
+            font-size: 14px;
         }
 
         .form-group input {
             width: 100%;
-            padding: 12px 16px;
-            border: 2px solid #e5e7eb;
-            border-radius: 8px;
-            font-size: 16px;
-            transition: all 0.3s;
+            padding: 12px 14px;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            font-size: 15px;
+            transition: all 0.2s;
         }
 
         .form-group input:focus {
             outline: none;
-            border-color: #667eea;
-            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(89, 144, 174, 0.15);
         }
 
         .submit-btn {
             width: 100%;
-            padding: 14px;
+            padding: 12px;
             background: var(--gradient-primary);
             color: white;
             border: none;
-            border-radius: 8px;
-            font-size: 16px;
+            border-radius: 6px;
+            font-size: 15px;
             font-weight: 600;
             cursor: pointer;
-            transition: all 0.3s;
+            transition: all 0.2s;
         }
 
         .submit-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+            opacity: 0.9;
         }
 
         .error-message {
-            background: #fee2e2;
+            background: #fef2f2;
             color: #991b1b;
-            padding: 12px 16px;
-            border-radius: 8px;
+            padding: 12px 14px;
+            border-radius: 6px;
             margin-bottom: 20px;
             text-align: center;
-            border-left: 4px solid #ef4444;
+            border-left: 3px solid #dc2626;
+            font-size: 14px;
         }
 
         .stats-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
             gap: 16px;
-            margin-bottom: 24px;
+            margin-bottom: 20px;
         }
 
         .stat-card {
             background: white;
-            border-radius: 12px;
-            padding: 20px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            border-radius: 10px;
+            padding: 18px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
         }
 
         .stat-card .label {
-            font-size: 14px;
+            font-size: 13px;
             color: #6b7280;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
         }
 
         .stat-card .value {
-            font-size: 32px;
+            font-size: 28px;
             font-weight: 700;
-            background: var(--gradient-primary);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            color: var(--primary-dark);
         }
 
         .filters-card {
             background: white;
-            border-radius: 16px;
-            padding: 24px;
-            margin-bottom: 24px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
         }
 
         .filters-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 16px;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 14px;
             align-items: end;
         }
 
@@ -182,48 +188,56 @@
         }
 
         .filter-group label {
-            font-size: 14px;
+            font-size: 13px;
             font-weight: 600;
             color: #374151;
-            margin-bottom: 6px;
+            margin-bottom: 5px;
         }
 
         .filter-group input,
         .filter-group select {
-            padding: 10px 12px;
-            border: 2px solid #e5e7eb;
-            border-radius: 8px;
+            padding: 9px 12px;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
             font-size: 14px;
-            transition: all 0.3s;
+            transition: all 0.2s;
         }
 
         .filter-group input:focus,
         .filter-group select:focus {
             outline: none;
-            border-color: #667eea;
+            border-color: var(--primary);
         }
 
         .filter-btn {
-            background: var(--gradient-primary);
+            background: var(--primary);
             color: white;
             border: none;
-            padding: 10px 20px;
-            border-radius: 8px;
+            padding: 10px 18px;
+            border-radius: 6px;
             cursor: pointer;
             font-weight: 600;
-            transition: all 0.3s;
+            font-size: 14px;
+            transition: all 0.2s;
         }
 
         .filter-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+            background: var(--primary-dark);
+        }
+
+        .refresh-btn {
+            background: #6BA89E;
+        }
+
+        .refresh-btn:hover {
+            background: #5A9488;
         }
 
         .table-card {
             background: white;
-            border-radius: 16px;
-            padding: 24px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
             overflow-x: auto;
         }
 
@@ -233,15 +247,16 @@
         }
 
         thead {
-            background: #f9fafb;
+            background: #f8fafc;
         }
 
         th {
             text-align: left;
-            padding: 12px 16px;
+            padding: 12px 14px;
             font-weight: 600;
             color: #374151 !important;
             border-bottom: 2px solid #e5e7eb;
+            font-size: 13px;
         }
 
         table thead th {
@@ -249,9 +264,10 @@
         }
 
         td {
-            padding: 16px;
+            padding: 14px;
             border-bottom: 1px solid #f3f4f6;
             color: #1f2937 !important;
+            font-size: 14px;
         }
 
         tbody td {
@@ -259,25 +275,25 @@
         }
 
         tr:hover {
-            background: #f9fafb;
+            background: #f8fafc;
             cursor: pointer;
         }
 
         tr.highlighted {
-            background: #fef3c7;
+            background: #e0f2fe;
             animation: highlight-fade 2s ease-in-out;
         }
 
         @keyframes highlight-fade {
-            0%, 100% { background: #fef3c7; }
-            50% { background: #fde68a; }
+            0%, 100% { background: #e0f2fe; }
+            50% { background: #bae6fd; }
         }
 
         .status-badge {
             display: inline-block;
-            padding: 4px 12px;
-            border-radius: 12px;
-            font-size: 12px;
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 11px;
             font-weight: 600;
             text-transform: uppercase;
         }
@@ -299,43 +315,43 @@
 
         .source-badge {
             display: inline-block;
-            padding: 4px 12px;
-            border-radius: 12px;
-            font-size: 12px;
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 11px;
             font-weight: 600;
         }
 
         .source-chatbot {
-            background: #e0e7ff;
-            color: #3730a3;
+            background: #e0f2fe;
+            color: #0369a1;
         }
 
         .source-contact_form {
-            background: #fce7f3;
-            color: #9f1239;
+            background: #dcfce7;
+            color: #166534;
         }
 
         .source-footer_form {
-            background: #e0f2fe;
-            color: #075985;
+            background: #f3e8ff;
+            color: #7c3aed;
         }
 
         .source-download_chat {
-            background: #e0e7ff;
-            color: #3730a3;
+            background: #e0f2fe;
+            color: #0369a1;
         }
 
         .status-select {
-            padding: 6px 12px;
-            border: 2px solid #e5e7eb;
-            border-radius: 6px;
+            padding: 6px 10px;
+            border: 1px solid #d1d5db;
+            border-radius: 4px;
             font-size: 13px;
             cursor: pointer;
-            transition: all 0.3s;
+            transition: all 0.2s;
         }
 
         .status-select:hover {
-            border-color: #667eea;
+            border-color: var(--primary);
         }
 
         .modal {
@@ -345,7 +361,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.7);
+            background: rgba(0, 0, 0, 0.6);
             z-index: 1000;
             align-items: center;
             justify-content: center;
@@ -358,9 +374,9 @@
 
         .modal-content {
             background: white;
-            border-radius: 16px;
-            padding: 32px;
-            max-width: 800px;
+            border-radius: 12px;
+            padding: 28px;
+            max-width: 700px;
             width: 100%;
             max-height: 80vh;
             overflow-y: auto;
@@ -369,14 +385,14 @@
 
         .modal-close {
             position: absolute;
-            top: 16px;
-            right: 16px;
+            top: 14px;
+            right: 14px;
             background: none;
             border: none;
-            font-size: 28px;
+            font-size: 24px;
             cursor: pointer;
             color: #6b7280;
-            transition: color 0.3s;
+            transition: color 0.2s;
         }
 
         .modal-close:hover {
@@ -385,16 +401,14 @@
 
         .modal h3 {
             margin-top: 0;
-            margin-bottom: 24px;
-            background: var(--gradient-primary);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            margin-bottom: 20px;
+            color: var(--primary-dark);
+            font-size: 20px;
         }
 
         .detail-grid {
             display: grid;
-            gap: 16px;
+            gap: 14px;
         }
 
         .detail-item {
@@ -418,10 +432,10 @@
         }
 
         .conversation-context {
-            background: #f3f4f6;
+            background: #f8fafc;
             padding: 16px;
-            border-radius: 8px;
-            border-left: 4px solid #667eea;
+            border-radius: 6px;
+            border-left: 3px solid var(--primary);
             max-height: 300px;
             overflow-y: auto;
             font-family: monospace;
@@ -437,11 +451,11 @@
         }
 
         .spinner {
-            border: 3px solid #f3f4f6;
-            border-top: 3px solid #667eea;
+            border: 3px solid #e5e7eb;
+            border-top: 3px solid var(--primary);
             border-radius: 50%;
-            width: 40px;
-            height: 40px;
+            width: 36px;
+            height: 36px;
             animation: spin 1s linear infinite;
             margin: 0 auto 16px;
         }
@@ -469,21 +483,22 @@
             justify-content: center;
             align-items: center;
             gap: 8px;
-            margin-top: 24px;
+            margin-top: 20px;
         }
 
         .pagination button {
-            padding: 8px 16px;
+            padding: 8px 14px;
             background: white;
-            border: 2px solid #e5e7eb;
-            border-radius: 8px;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
             cursor: pointer;
-            transition: all 0.3s;
+            transition: all 0.2s;
+            font-size: 14px;
         }
 
         .pagination button:hover:not(:disabled) {
-            border-color: #667eea;
-            background: #f9fafb;
+            border-color: var(--primary);
+            background: #f8fafc;
         }
 
         .pagination button:disabled {
@@ -526,7 +541,7 @@
     <!-- Login Screen -->
     <div id="loginScreen" class="login-screen">
         <div class="login-card">
-            <h2>🔐 Admin Login</h2>
+            <h2>Admin Login</h2>
             <div id="loginError" class="error-message" style="display: none;"></div>
             <form id="loginForm">
                 <div class="form-group">
@@ -543,8 +558,8 @@
         <!-- Header -->
         <div class="admin-header">
             <div>
-                <h1>📞 Callback Requests Dashboard</h1>
-                <p style="margin: 4px 0 0 0; color: #6b7280; font-size: 14px;">Manage and track customer callback requests</p>
+                <h1>Callback Requests</h1>
+                <p class="header-subtitle">Manage and track customer callback requests</p>
             </div>
             <button id="logoutBtn" class="logout-btn">Logout</button>
         </div>
@@ -617,7 +632,7 @@
                 </div>
                 <div class="filter-group">
                     <label>&nbsp;</label>
-                    <button id="refreshBtn" class="filter-btn" style="background: #10b981;">🔄 Refresh</button>
+                    <button id="refreshBtn" class="filter-btn refresh-btn">Refresh</button>
                 </div>
             </div>
         </div>
