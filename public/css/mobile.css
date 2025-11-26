@@ -653,33 +653,35 @@
        FOOTER - MOBILE
        ============================================ */
     footer {
-        padding: 2rem 0 1.5rem 0 !important;
+        padding: 2.5rem 0 2rem 0 !important;
     }
 
     .footer-content {
         display: flex !important;
         flex-direction: column !important;
-        gap: 1.5rem !important;
+        gap: 2rem !important;
         text-align: center !important;
     }
 
     .footer-section {
-        margin-bottom: 0 !important;
+        margin-bottom: 0.5rem !important;
+        padding: 0 0.5rem !important;
     }
 
     .footer-logo {
-        height: 36px !important;
-        margin: 0 auto 0.75rem auto !important;
+        height: 40px !important;
+        margin: 0 auto 1rem auto !important;
     }
 
     .footer-section h4 {
-        font-size: 1rem !important;
-        margin-bottom: 0.75rem !important;
+        font-size: 1.1rem !important;
+        margin-bottom: 1rem !important;
     }
 
     .footer-section p {
-        font-size: 0.85rem !important;
-        line-height: 1.5 !important;
+        font-size: 0.9rem !important;
+        line-height: 1.6 !important;
+        margin-bottom: 0.5rem !important;
     }
 
     .footer-section ul {
@@ -689,31 +691,35 @@
     }
 
     .footer-section ul li {
-        margin-bottom: 0.5rem !important;
+        margin-bottom: 0.75rem !important;
     }
 
     .footer-section ul a {
-        font-size: 0.875rem !important;
+        font-size: 0.9rem !important;
     }
 
     .footer-bottom {
         flex-direction: column !important;
-        gap: 0.75rem !important;
+        gap: 1rem !important;
         text-align: center !important;
-        padding-top: 1.25rem !important;
-        margin-top: 1.5rem !important;
+        padding: 1.5rem 1rem 0 1rem !important;
+        margin-top: 2rem !important;
         border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
         width: 100% !important;
     }
 
     .footer-bottom p {
-        font-size: 0.8rem !important;
-        line-height: 1.5 !important;
+        font-size: 0.85rem !important;
+        line-height: 1.6 !important;
+        margin-bottom: 0.5rem !important;
     }
 
     .disclaimer {
-        font-size: 0.75rem !important;
+        font-size: 0.8rem !important;
         opacity: 0.7 !important;
+        line-height: 1.5 !important;
+        padding: 0 0.5rem !important;
+        margin-top: 0.5rem !important;
     }
 
     /* ============================================
