@@ -59,7 +59,7 @@ class AIChat {
         await this.loadConfig();
 
         // Add welcome message
-        this.addMessage('ai', 'Hello! 👋 I\'m here to help you grow your business with AI and digital marketing. How can I assist you today?');
+        this.addMessage('ai', 'Hello! 👋 Welcome to Elite Dentistry. I\'m here to help you with Invisalign information, pricing, and booking your free consultation. How can I assist you today?');
 
         // Add suggested questions if available
         if (this.suggestedQuestions.length > 0 && !this.hasShownSuggestions) {
@@ -150,7 +150,7 @@ class AIChat {
         this.streamingMessageDiv = null;
         
         // Add welcome message back
-        this.addMessage('ai', 'Hello! 👋 I\'m here to help you grow your business with AI and digital marketing. How can I assist you today?');
+        this.addMessage('ai', 'Hello! 👋 Welcome to Elite Dentistry. I\'m here to help you with Invisalign information, pricing, and booking your free consultation. How can I assist you today?');
         
         // Show suggested questions again
         if (this.suggestedQuestions.length > 0) {
